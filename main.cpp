@@ -175,63 +175,43 @@ class Lista
 
 int main() {
 
+char escolha;
 float cateto1, cateto2;
 
-cout<<endl<<endl<<"TRABALHO PRÁTICO - Utilização de lista e arquivos"<<endl<<endl;
+cout<<endl<<endl<<"TRABALHO PRÁTICO - Utilização de Lista e Arquivos"<<endl<<endl;
 
-cout<<"Digite o valor do 1º cateto:"<<endl;
-cin>>cateto1;
-cout<<"Digite o valor do 2º cateto:"<<endl;
-cin>>cateto2;
 
-tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
-cout<<endl<<Triangulo<<endl;    
+cout<<"!!! Dados dos Triangulos Retangulos !!!"<<endl<<endl;
+cout<<endl<<"GRAVAR as informações      > tecle 'g'"<<endl;
+cout<<"VISUALIZAR informações     > tecle 'v'"<<endl<<endl;
+cout<<"FECHAR programa            > tecle 'x'"<<endl<<endl;
+cin>>escolha;
 
-Lista tT;
-tT.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));    
-tT.imprimirElementos();
+while (escolha=='g' || escolha=='v')
+{
+    if (escolha=='g')
+    {
+    cout<<endl<<"Digite o valor do 1º cateto:"<<endl;
+    cin>>cateto1;
+    cout<<"Digite o valor do 2º cateto:"<<endl;
+    cin>>cateto2;
+    tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
+    }
+    else
+    {
+    cout<<"ELSE"<<endl;
+    Lista tT;
+    tT.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));    
+    tT.imprimirElementos();   
+    }
+  
+cout<<endl<<endl<<"GRAVAR as informações      > tecle 'g'"<<endl;
+cout<<"VISUALIZAR as informações  > tecle 'v'"<<endl<<endl;
+cout<<"FECHAR programa            > tecle 'x'"<<endl<<endl;
+cin>>escolha;
+    
+}
 
+cout<<endl<<"Obrigado !"<<endl;
 
 }    
-/*
-cout<<"      CALCULADORA MALUCA"<<endl<<endl;
-cout<<"adicao        - aperte 'a'"<<endl;
-cout<<"subtracao     - aperte 's'"<<endl;
-cout<<"multiplicacao - aperte 'm'"<<endl;
-cout<<"divisao       - aperte 'd'"<<endl<<endl;
-cin>>escolha;
-cout<<"Insira o Primeiro numero"<<endl;
-cin>>num1;
-cout<<"Insira o Segundo numero"<<endl;
-cin>>num2;
-
-switch (escolha)
-    {
-        case 'a':
-        {
-            resposta=(num1+num2);
-            break;
-        }
-        case 's':
-        {
-            resposta=(num1-num2);
-            break;
-        }
-        case 'm':
-        {
-            resposta=(num1*num2);
-            break;
-        }
-        case 'd':
-        {
-            resposta=(num1/num2);
-            break;
-        }
-        default:
-        {cout<<"opcao invalida";
-        }
-    }
-
-    cout<<"O resultado da operacao e "<<resposta;
-}
-*/
