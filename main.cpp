@@ -7,7 +7,7 @@ using namespace std;
 ifstream leitura;
 ofstream gravar;
 
-int loop;
+int loop, controle=0;
 int matricula[51], investimentos[51], posts[51], matr, id, postsmatricula;
 
 int Download(){
@@ -95,11 +95,13 @@ class Lista
   public:
   No* inicio;
   No* fim;
+  No* ctrl;
 
   Lista()
   {
     inicio = NULL;
     fim=NULL;
+    ctrl=NULL; 
   }
 
   Lista(float num1, float num2, float num3)
@@ -130,7 +132,7 @@ class Lista
     {
       while(i)
       {
-        i->obterValor();
+        cout<<i->obterValor()<<endl;
         i = i->obterProximo();
       }
       cout<<endl;
@@ -140,7 +142,11 @@ class Lista
   void GravarElementos()
   {
     No* i=inicio;
-    No* l=inicio;
+    if (ctrl!=NULL)
+    {
+    No* i=ctrl;
+    cout<<"recebeu ctrl"<<endl;
+    }
     if(seVazia())
     {
       cout<<"Lista sem elementos!"<<endl;
@@ -152,7 +158,8 @@ class Lista
         i->Uploadtxt();
         i = i->obterProximo();
       }
-      cout<<"Foi criado o arquivo 'banco_de_dados.txt'"<<endl;
+    ctrl=fim;
+    cout<<"Foi criado o arquivo 'banco_de_dados.txt'"<<endl;
     }
   }  
 
@@ -203,6 +210,7 @@ while (escolha=='g' || escolha=='v')
         cout<<"Digite o valor do 2º cateto:"<<endl;
         cin>>cateto2;
         tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
+        
         lTriangle.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
         }
     lTriangle.GravarElementos();     
