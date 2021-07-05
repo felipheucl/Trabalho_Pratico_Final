@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <list>
 
 using namespace std;
 
@@ -60,23 +61,29 @@ float Hipotenusa(float num1, float num2)
 class No
 {
   public:
-  float valor;
+  float b,c,a;
   No* proximo;
 
-  No(int elemento)
+  No(float elemento1, float elemento2, float elemento3)
   {
-    this->valor=elemento;
-    this->proximo=NULL;
+  this->b=elemento1;
+  this->c=elemento2;
+  this->a=elemento3;
+  this->proximo=NULL;
   }
+  
+  
+  float obterValr() //impressao da lista
+  {
+  return b; 
+  return c; 
+  return a; 
+  }
+  
 
   void definirProximo(No* end)
   {
     proximo=end;
-  }
-
-  int obterValor()
-  {
-    return valor;
   }
 
   No* obterProximo()
@@ -97,9 +104,9 @@ class Lista
     fim=NULL;
   }
 
-  Lista(int num)
+  Lista(float num1, float num2, float num3)
   {
-    inicio = new No(num);
+    inicio = new No(num1,num2,num3);
     fim = inicio;
   }
 
@@ -113,7 +120,7 @@ class Lista
     return (inicio == NULL);
   }
 
-  void imprimirElementos()
+  /*void imprimirElementos()
   {
     cout<<"ELEMENTOS DA LISTA"<<endl;
     No* i=inicio;
@@ -131,26 +138,10 @@ class Lista
       cout<<endl;
     }
   }
-
-  void insereNoInicio(int valor)
+*/
+ void insereNoFim(float v1, float v2, float v3)
   {
-    No* novo = new No(valor);
-
-    if(seVazia())
-    {
-      inicio= novo;
-      fim=novo;
-    }
-    else
-    {
-      novo -> definirProximo(inicio);
-      inicio = novo;
-    }
-  }
-
-  void insereNoFim(int valor)
-  {
-    No* novo = new No(valor);
+    No* novo = new No(v1,v2,v3);
 
     if(seVazia())
     {
@@ -163,26 +154,8 @@ class Lista
       fim = novo;
     }
   }
-
-  int tamanhoLista()
-  { 
-    if(seVazia())
-    {
-      return 0;
-    }
-    No* i = inicio;
-    int tamanho = 0;
-
-    do
-    {
-      i = i->obterProximo();
-      tamanho++;
-    }while(i);
-
-    return tamanho;
-  }
-
-  bool existeElemento(int valor)
+/*
+ bool existeElemento(int valor)
   {
     No* i = inicio;
     while(i)
@@ -197,38 +170,7 @@ class Lista
     }
     return false;
   }
-
-  void removerDaLista()
-  {
-    if(!seVazia())
-    {
-      if(inicio->obterProximo() == NULL)
-      {
-        inicio = NULL;
-      }else if(inicio->obterProximo()->obterProximo()==NULL)
-      {
-        inicio->definirProximo(NULL);
-      }else
-      {
-        No* anteriorDoAnterior = inicio;
-        No* anterior = inicio->obterProximo();
-        No* elo = inicio->obterProximo()->obterProximo();
-
-        while(elo)
-        {
-          No* auxiliar = anterior;
-          anterior = elo;
-          anteriorDoAnterior = auxiliar;
-          elo= elo->obterProximo();
-        }
-
-        delete anteriorDoAnterior->obterProximo();
-        anteriorDoAnterior->definirProximo(NULL);
-        fim=anteriorDoAnterior;
-      }
-    }
-  }
-
+ */
 };
 
 // ************************
@@ -242,7 +184,10 @@ cout<<endl<<endl<<"TRABALHO PRÁTICO - Utilização de lista e arquivos"<<endl<<
 cout<<"Digite o valor do 1º cateto:"<<endl;
 cin>>cateto1;
 cout<<"Digite o valor do 2º cateto:"<<endl;
-cin>>cateto2;    
+cin>>cateto2;
+
+No* Lista=NULL;
+Lista=insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
 
 tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
 cout<<endl<<Triangulo<<endl;    
