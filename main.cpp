@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <list>
 
 using namespace std;
 
@@ -73,11 +72,10 @@ class No
   }
   
   
-  float obterValr() //impressao da lista
+  float obterValor() //impressao da lista
   {
-  return b; 
-  return c; 
-  return a; 
+  cout<<b<<" - "<<c<<" - "<<a<<endl;
+  return b;
   }
   
 
@@ -120,9 +118,9 @@ class Lista
     return (inicio == NULL);
   }
 
-  /*void imprimirElementos()
+  void imprimirElementos()
   {
-    cout<<"ELEMENTOS DA LISTA"<<endl;
+    cout<<"ELEMENTOS DA LISTA: "<<endl;
     No* i=inicio;
     if(seVazia())
     {
@@ -132,13 +130,13 @@ class Lista
     {
       while(i)
       {
-        cout<< i->obterValor()<<endl;
+        i->obterValor();
         i = i->obterProximo();
       }
       cout<<endl;
     }
   }
-*/
+
  void insereNoFim(float v1, float v2, float v3)
   {
     No* novo = new No(v1,v2,v3);
@@ -186,12 +184,12 @@ cin>>cateto1;
 cout<<"Digite o valor do 2º cateto:"<<endl;
 cin>>cateto2;
 
-No* Lista=NULL;
-Lista=insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
-
 tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
 cout<<endl<<Triangulo<<endl;    
-    
+
+Lista tT;
+tT.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));    
+tT.imprimirElementos();
 
 
 }    
