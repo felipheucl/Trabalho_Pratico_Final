@@ -4,22 +4,13 @@
 
 using namespace std;
 
-int matricula[51], investimentos[51], posts[51], matr, id, postsmatricula;
 ifstream leitura;
 ofstream gravar;
-string nome, sobrenome, TotalPosts;
 
-int Arquivando(){
-    gravar.open("banco_de_dados.txt",ios::app);
-    gravar<<postsmatricula<<"\n";
-    gravar<<TotalPosts<<"\n";
-    gravar<<nome<<" "<<sobrenome<<"\n";
-    gravar<<id;
-    gravar.close();
-    return 0;
-}
+int loop;
+int matricula[51], investimentos[51], posts[51], matr, id, postsmatricula;
 
-int ArqVet() {
+int Download(){
     leitura.open("banco_de_dados.txt", ios::app);
     leitura>>matricula[0];
     matr=matricula[0];
@@ -74,12 +65,19 @@ class No
   }
   
   
-  float obterValor() //impressao da lista
+  float obterValor() //impressao na tela
   {
   cout<<b<<" - "<<c<<" - "<<a<<endl;
   return b;
   }
   
+  float Uploadtxt() //gravar em arquivo txt
+  {
+  gravar.open("banco_de_dados.txt", ios::app);
+  gravar<<b<<" "<<c<<" "<<a<<"\n";
+  gravar.close();
+  return b;
+  }
 
   void definirProximo(No* end)
   {
@@ -139,6 +137,25 @@ class Lista
     }
   }
 
+  void GravarElementos()
+  {
+    No* i=inicio;
+    No* l=inicio;
+    if(seVazia())
+    {
+      cout<<"Lista sem elementos!"<<endl;
+    }
+    else
+    {
+      while(i)
+      {
+        i->Uploadtxt();
+        i = i->obterProximo();
+      }
+      cout<<"Foi criado o arquivo 'banco_de_dados.txt'"<<endl;
+    }
+  }  
+
  void insereNoFim(float v1, float v2, float v3)
   {
     No* novo = new No(v1,v2,v3);
@@ -172,22 +189,27 @@ cout<<"VISUALIZAR informações     > tecle 'v'"<<endl<<endl;
 cout<<"FECHAR programa            > tecle 'x'"<<endl<<endl;
 cin>>escolha;
 
-Lista tT;
+Lista lTriangle;
 while (escolha=='g' || escolha=='v')
 {
     if (escolha=='g')
     {
-    cout<<endl<<"Digite o valor do 1º cateto:"<<endl;
-    cin>>cateto1;
-    cout<<"Digite o valor do 2º cateto:"<<endl;
-    cin>>cateto2;
-    tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
-    tT.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2)); 
+    cout<<"Quantos triagulos deseja cadastrar?  ";
+    cin>>loop;
+    for (int num=0; num<loop; num++)
+        {
+        cout<<endl<<"Digite o valor do 1º cateto:"<<endl;
+        cin>>cateto1;
+        cout<<"Digite o valor do 2º cateto:"<<endl;
+        cin>>cateto2;
+        tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
+        lTriangle.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
+        }
+    lTriangle.GravarElementos();     
     }
     else
     {
-    cout<<"ELSE"<<endl;
-    tT.imprimirElementos();   
+      
     }
   
 cout<<endl<<endl<<"GRAVAR as informações      > tecle 'g'"<<endl;
