@@ -32,6 +32,8 @@ int ArqVet() {
     return 0;
 }
 
+// as linhas abaixo foram extraidas do código da avaliação P3
+// trazem o STRUCT criado e a função para cálculo da hipotenusa
 struct tTriangulos
 {
         tTriangulos (float l1, float l2, float l3): lado1(l1), lado2(l2), lado3(l3)
@@ -53,10 +55,10 @@ float Hipotenusa(float num1, float num2)
        float r;
        r=sqrt(num1*num1 + num2*num2);
        return r;
-
 }
+// *****************************************
 
-// ************************
+
 class No
 {
   public:
@@ -152,23 +154,6 @@ class Lista
       fim = novo;
     }
   }
-/*
- bool existeElemento(int valor)
-  {
-    No* i = inicio;
-    while(i)
-    {
-      if(i->obterValor()==valor)
-      {
-        return true;
-      }else
-      {
-        i = i->obterProximo();
-      }
-    }
-    return false;
-  }
- */
 };
 
 // ************************
@@ -187,6 +172,7 @@ cout<<"VISUALIZAR informações     > tecle 'v'"<<endl<<endl;
 cout<<"FECHAR programa            > tecle 'x'"<<endl<<endl;
 cin>>escolha;
 
+Lista tT;
 while (escolha=='g' || escolha=='v')
 {
     if (escolha=='g')
@@ -196,12 +182,11 @@ while (escolha=='g' || escolha=='v')
     cout<<"Digite o valor do 2º cateto:"<<endl;
     cin>>cateto2;
     tTriangulos Triangulo=tTriangulos(cateto1,cateto2,Hipotenusa(cateto1,cateto2));
+    tT.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2)); 
     }
     else
     {
     cout<<"ELSE"<<endl;
-    Lista tT;
-    tT.insereNoFim(cateto1,cateto2,Hipotenusa(cateto1,cateto2));    
     tT.imprimirElementos();   
     }
   
