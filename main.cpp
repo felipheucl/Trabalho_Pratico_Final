@@ -7,9 +7,10 @@ using namespace std;
 ifstream leitura;
 ofstream gravar;
 
-int loop, controle=0;
-int matricula[51], investimentos[51], posts[51], matr, id, postsmatricula;
+int loop;
 
+/*
+int matricula[51], investimentos[51], posts[51], matr, id, postsmatricula;
 int Download(){
     leitura.open("banco_de_dados.txt", ios::app);
     leitura>>matricula[0];
@@ -22,6 +23,7 @@ int Download(){
     leitura.close();
     return 0;
 }
+*/
 
 // as linhas abaixo foram extraidas do código da avaliação P3
 // trazem o STRUCT criado e a função para cálculo da hipotenusa
@@ -95,13 +97,12 @@ class Lista
   public:
   No* inicio;
   No* fim;
-  No* ctrl;
+  No* ctrl=NULL;
 
   Lista()
   {
     inicio = NULL;
     fim=NULL;
-    ctrl=NULL; 
   }
 
   Lista(float num1, float num2, float num3)
@@ -141,26 +142,31 @@ class Lista
 
   void GravarElementos()
   {
-    No* i=inicio;
-    if (ctrl!=NULL)
-    {
-    No* i=ctrl;
-    cout<<"recebeu ctrl"<<endl;
-    }
-    if(seVazia())
-    {
-      cout<<"Lista sem elementos!"<<endl;
-    }
+    No* i;
+    if (ctrl==NULL)
+     {
+     i=inicio;
+     }
     else
-    {
-      while(i)
+     {
+     i=ctrl;
+     i = i->obterProximo();    
+     }
+
+    if(seVazia())
+     {
+     cout<<"Lista sem elementos!"<<endl;
+     }
+    else
+     {
+     while(i)
       {
-        i->Uploadtxt();
-        i = i->obterProximo();
+      i->Uploadtxt();
+      i = i->obterProximo();
       }
-    ctrl=fim;
-    cout<<"Foi criado o arquivo 'banco_de_dados.txt'"<<endl;
-    }
+      ctrl=fim;  
+      cout<<"Arquivo 'banco_de_dados.txt' atualizado!"<<endl;
+     }
   }  
 
  void insereNoFim(float v1, float v2, float v3)
@@ -169,13 +175,13 @@ class Lista
 
     if(seVazia())
     {
-      inicio = novo;
-      fim = novo;
+     inicio = novo;
+     fim = novo;
     }
     else
     {
-      fim -> definirProximo(novo);
-      fim = novo;
+     fim -> definirProximo(novo);
+     fim = novo;
     }
   }
 };
