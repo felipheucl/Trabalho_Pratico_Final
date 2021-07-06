@@ -96,7 +96,8 @@ class Lista
    float Download() // Lê o arquivo .TXT e passa os dados para a Lista Encadeada
    {
    int j=0;
-   float aux[]={0,0,0,0};    
+   float aux[]={0,0,0,0};
+   inicio=NULL;
    leitura.open("banco_de_dados.txt", ios::in);
    while(getline(leitura,txt)) // faz a leitura do arquivo . TXT, linha a linha
    {
@@ -104,7 +105,7 @@ class Lista
     j=j+1;            // lógica para passar de 3 em 3 as informações do .TXT
     if (j==3)
      {
-      insereNoFim(aux[0],aux[1],aux[2]);
+      sobreescrever(aux[0],aux[1],aux[2]);
       j=0;
      }
     }  
@@ -138,14 +139,14 @@ class Lista
       cout<<i->obterValor()<<endl;
       i = i->obterProximo();
      }
-      cout<<endl;
+     ctrl=fim;
     }
   }
 
  void GravarElementos()
  {
   No* i;
-  if (ctrl==NULL)
+  if (ctrl==NULL) // controle para não gravar dados duplicados
   {
    i=inicio;
   }
@@ -186,6 +187,22 @@ class Lista
     fim = novo;
    }
   }
+
+ void sobreescrever(float v1, float v2, float v3)
+ {
+  No* novo = new No(v1,v2,v3);
+
+  if(seVazia())
+  {
+   inicio = novo;
+   fim = novo;
+  }
+  else
+   {
+    fim -> definirProximo(novo);
+    fim = novo;
+   }
+ }
 };
 
 // ************************
